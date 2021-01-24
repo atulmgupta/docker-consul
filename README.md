@@ -1,4 +1,4 @@
-# Demo using docker Consul Server and Client
+# Demo using Docker Consul Server and Client
 
 Execute Command
 ```
