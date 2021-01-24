@@ -1,0 +1,23 @@
+{
+  "primary_datacenter": "amg",
+  "server": false,
+  "acl": {
+    "enabled": true,
+    "default_policy": "deny",
+    "down_policy": "extend-cache",
+    "tokens": {
+      "agent": "da666809-98ca-0e94-a99c-893c4bf5f9eb"
+    }
+  },
+  "verify_incoming": false,
+  "verify_outgoing": true,
+  "verify_server_hostname": true,  
+  "ca_file": "/consul/config/ca.cert",
+  "auto_encrypt": {
+    "tls": true
+  },
+  "ports": {
+    "https": 8500,
+    "http": -1
+  }
+}

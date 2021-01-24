@@ -1,0 +1,89 @@
+version: '3'
+
+services:
+  consul-server-node1:
+    image: consul:latest
+    command: consul agent -config-file=/consul/config/consul.json
+    container_name: server-leader
+    restart: always
+    networks:
+     - consul-demo
+    ports:
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:8600"
+      - "8600:8600/udp"
+    volumes:
+      - ./data/:/consul/data/
+      - ./config/:/consul/config
+
+  # consul-server-node2:
+  #   image: consul:latest
+  #   command: consul agent -server -retry-join=consul-server-node1
+  #   container_name: server-2
+  #   restart: always
+  #   networks:
+  #    - consul-demo
+
+  consul-client:
+    image: consul:latest
+    container_name: client-node-1
+    networks:
+      - consul-demo
+    command: agent -datacenter=amg -retry-join=consul-server-node1 -config-file=/consul/config/consul.json -node-id="7a3a2d62-640e-4d40-b1dd-4db207fd4738"
+    depends_on:
+      - consul-server-node1
+    volumes:
+      - ./data/:/consul/data/
+      - ./config-agent/:/consul/config      
+
+  consul-client-2:
+    image: consul:latest
+    container_name: client-node-2
+    networks:
+      - consul-demo
+    command: agent -datacenter=amg -retry-join=consul-server-node1 -config-file=/consul/config/consul.json -node-id="7a3a2d62-640e-4d40-b1dd-4db207fd4739"
+    depends_on:
+      - consul-server-node1
+    volumes:
+      - ./data/:/consul/data/
+      - ./config-agent/:/consul/config
+
+  consul-client-3:
+    image: consul:latest
+    container_name: client-node-3
+    networks:
+      - consul-demo
+    command: agent -datacenter=amg -retry-join=consul-server-node1 -config-file=/consul/config/consul.json -node-id="7a3a2d62-640e-4d40-b1dd-4db207fd4740"
+    depends_on:
+      - consul-server-node1
+    volumes:
+      - ./data/:/consul/data/
+      - ./config-agent/:/consul/config
+
+  consul-client-4:
+    image: consul:latest
+    container_name: client-node-4
+    networks:
+      - consul-demo
+    command: agent -datacenter=amg -retry-join=consul-server-node1 -config-file=/consul/config/consul.json -node-id="7a3a2d62-640e-4d40-b1dd-4db207fd4741"
+    depends_on:
+      - consul-server-node1
+    volumes:
+      - ./data/:/consul/data/
+      - ./config-agent/:/consul/config
+
+  consul-client-5:
+    image: consul:latest
+    container_name: client-node-5
+    networks:
+      - consul-demo
+    command: agent -datacenter=amg -retry-join=consul-server-node1 -config-file=/consul/config/consul.json -node-id="7a3a2d62-640e-4d40-b1dd-4db207fd4742"
+    depends_on:
+      - consul-server-node1
+    volumes:
+      - ./data/:/consul/data/
+      - ./config-agent/:/consul/config
+
+networks:
+  consul-demo:
