@@ -2,10 +2,10 @@
   "datacenter": "amg",
   "data_dir": "/consul/data/",
   "log_level": "INFO",
-  "node_name": "consul-server-leader",
+  "node_name": "leader",
   "server": true,
   "bootstrap_expect": 1,
-  "primary_datacenter": "amg",
+  "encrypt": "pmsKacTdVOb4x8/Vtr9PWw==",
   "ui_config": {
     "enabled": true
   },
@@ -18,19 +18,23 @@
     }
   },
   "ports": {
-    "https": 8500,
+    "https": 8501,
     "http": -1
   },
+  "client_addr": "0.0.0.0",
   "addresses": {
     "http": "0.0.0.0"
   },
-  "verify_incoming": true,
+  "verify_incoming": false,
   "verify_outgoing": true,
   "verify_server_hostname": true,
-  "ca_file": "/consul/config/ca.cert",
-  "cert_file": "/consul/config/consul.cert",
-  "key_file": "/consul/config/consul.key",
+  "verify_incoming_rpc": true,
+  "ca_file": "/certs/consul-agent-ca.pem",
+  "key_file": "/certs/server.amg.consul.key",
+  "cert_file": "/certs/server.amg.consul.crt",
   "auto_encrypt": {
     "allow_tls": true
-  }
+  },
+  "enable_script_checks": false,
+  "disable_remote_exec": true
 }
