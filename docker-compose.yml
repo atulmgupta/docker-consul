@@ -13,9 +13,11 @@ services:
       - "8500:8500"
       - "8600:8600"
       - "8600:8600/udp"
+      - "8501:8501"
     volumes:
       - ./data/:/consul/data/
       - ./config/:/consul/config
+      - ./certs:/certs/
 
   # consul-server-node2:
   #   image: consul:latest
@@ -36,6 +38,7 @@ services:
     volumes:
       - ./data/:/consul/data/
       - ./config-agent/:/consul/config      
+      - ./certs:/certs/
 
   consul-client-2:
     image: consul:latest
@@ -48,6 +51,7 @@ services:
     volumes:
       - ./data/:/consul/data/
       - ./config-agent/:/consul/config
+      - ./certs:/certs/
 
   consul-client-3:
     image: consul:latest
@@ -60,6 +64,7 @@ services:
     volumes:
       - ./data/:/consul/data/
       - ./config-agent/:/consul/config
+      - ./certs:/certs/
 
   consul-client-4:
     image: consul:latest
@@ -72,6 +77,7 @@ services:
     volumes:
       - ./data/:/consul/data/
       - ./config-agent/:/consul/config
+      - ./certs:/certs/
 
   consul-client-5:
     image: consul:latest
@@ -84,6 +90,7 @@ services:
     volumes:
       - ./data/:/consul/data/
       - ./config-agent/:/consul/config
-
+      - ./certs:/certs/
+      
 networks:
   consul-demo:
