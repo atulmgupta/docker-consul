@@ -5,36 +5,36 @@
 
 
 ```
-# Check Domain 
-server.amg.consul
+# Domain 
+server.<<datacenter>>.consul
 
 # Generate consul ca cert
 consul tls ca create
 
 # Generate server certs
-openssl req -new -newkey rsa:2048 -nodes -keyout server.amg.consul.key -out server.amg.consul.csr -subj '/CN=server.amg.consul'
+openssl req -new -newkey rsa:2048 -nodes -keyout server.<<datacenter>>.consul.key -out server.<<datacenter>>.consul.csr -subj '/CN=server.<<datacenter>>.consul'
 
 # Self sign server cert
-openssl x509 -req -in server.amg.consul.csr  -CA consul-agent-ca.pem -CAkey consul-agent-ca-key.pem -CAcreateserial -out server.amg.consul.crt
+openssl x509 -req -in server.<<datacenter>>.consul.csr  -CA consul-agent-ca.pem -CAkey consul-agent-ca-key.pem -CAcreateserial -out server.<<datacenter>>.consul.crt
 
 # View cert
-openssl x509 -text -noout -in server.amg.consul.crt
+openssl x509 -text -noout -in server.<<datacenter>>.consul.crt
 
 # Generate cleint certs
-openssl req -new -newkey rsa:2048 -nodes -keyout client.amg.consul.key -out client.amg.consul.csr -subj '/CN=client.amg.consul'
+openssl req -new -newkey rsa:2048 -nodes -keyout client.<<datacenter>>.consul.key -out client.<<datacenter>>.consul.csr -subj '/CN=client.<<datacenter>>.consul'
 
 # Self sign client cert
-openssl x509 -req -in client.amg.consul.csr -CA consul-agent-ca.pem -CAkey consul-agent-ca-key.pem -out client.amg.consul.crt
+openssl x509 -req -in client.<<datacenter>>.consul.csr -CA consul-agent-ca.pem -CAkey consul-agent-ca-key.pem -out client.<<datacenter>>.consul.crt
 
 # Enable SAN
 vim server-ext.cnf
-echo 'subjectAltName=DNS:server.amg.consul,IP:0.0.0.0' > server-ext.cnf
+echo 'subjectAltName=DNS:server.<<datacenter>>.consul,IP:0.0.0.0' > server-ext.cnf
 
 # Update server cert for x509 extensions
-openssl x509 -req -in server.amg.consul.csr -days 60 -CA consul-agent-ca.pem -CAkey consul-agent-ca-key.pem -CAcreateserial -out server.amg.consul.crt -extfile server-ext.cnf
+openssl x509 -req -in server.<<datacenter>>.consul.csr -days 60 -CA consul-agent-ca.pem -CAkey consul-agent-ca-key.pem -CAcreateserial -out server.<<datacenter>>.consul.crt -extfile server-ext.cnf
 
 # Update client cert for x509 extensions
-openssl x509 -req -in client.amg.consul.csr -days 60 -CA consul-agent-ca.pem -CAkey consul-agent-ca-key.pem -out client.amg.consul.crt -extfile server-ext.cnf
+openssl x509 -req -in client.<<datacenter>>.consul.csr -days 60 -CA consul-agent-ca.pem -CAkey consul-agent-ca-key.pem -out client.<<datacenter>>.consul.crt -extfile server-ext.cnf
 ```
 
 ## Useful Consul Commands
@@ -53,8 +53,8 @@ docker exec server-leade consul members -token=<<token>>
     "verify_server_hostname": true,
     "verify_incoming_rpc": true, # rpc will be encrypted
     "ca_file": "consul-agent-ca.pem",
-    "key_file": "server.amg.consul.key",
-    "cert_file": "server.amg.consul.crt",
+    "key_file": "server.<<datacenter>>.consul.key",
+    "cert_file": "server.<<datacenter>>.consul.crt",
     "auto_encrypt": {
         "allow_tls": true
     },
