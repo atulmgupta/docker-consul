@@ -1,0 +1,27 @@
+server:
+  port: 9003
+#  ssl:
+#    key-store-type: pkcs12
+#    key-store: /Volumes/AtulMac/Github/kotlin-spring-boot-demo/src/main/resources/26_01.pkcs12
+#    key-store-password: Atul
+#    enabled: true
+#    key-password: Atul
+spring:
+  application:
+    name: person-service-kotlin
+  cloud:
+    consul:
+      discovery:
+        acl-token: da666809-98ca-0e94-a99c-893c4bf5f9eb
+      host: server.amg.consul
+      port: 8503
+      tls:
+        key-store-instance-type: pkcs12
+        key-store-path: /Volumes/AtulMac/Github/kotlin-spring-boot-demo/src/main/resources/26_01.pkcs12
+        key-store-password: Atul
+        certificate-path: /Volumes/AtulMac/Github/kotlin-spring-boot-demo/src/main/resources/keystoresample.jks
+        certificate-password: changeit
+      scheme: https
+logging:
+  level:
+    root: info

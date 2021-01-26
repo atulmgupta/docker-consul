@@ -9,13 +9,25 @@
       "agent": "da666809-98ca-0e94-a99c-893c4bf5f9eb"
     }
   },
-  "verify_incoming": true,
+  "verify_incoming": false,
   "verify_outgoing": true,
   "verify_server_hostname": true,
+  "verify_incoming_rpc": true,
   "ca_file": "/certs/consul-agent-ca.pem",
   "cert_file": "/certs/client.amg.consul.crt",
   "key_file": "/certs/client.amg.consul.key",
   "auto_encrypt": {
     "tls": true
+  },
+  "client_addr": "0.0.0.0",
+  "addresses": {
+    "http": "0.0.0.0"
+  },
+  "ui_config": {
+    "enabled": true
+  },
+  "ports": {
+    "https": 8503,
+    "http": -1
   }
 }

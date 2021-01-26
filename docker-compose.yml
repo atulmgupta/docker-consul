@@ -65,6 +65,8 @@ services:
       - ./data/:/consul/data/
       - ./config-agent/:/consul/config
       - ./certs:/certs/
+    ports:      
+      - "8503:8503"
 
   consul-client-4:
     image: consul:latest
